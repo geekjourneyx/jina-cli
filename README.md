@@ -46,10 +46,13 @@ curl -o ~/.openclaw/workspace/skills/jina-cli.md \
   https://raw.githubusercontent.com/geekjourneyx/jina-cli/main/skills/jina-cli/SKILL.md
 ```
 
-**安装方式二** - npx 安装：
+**安装方式** - 直接复制 skill 文件：
 
 ```bash
-npx skills add https://github.com/geekjourneyx/jina-cli --skill jina-cli -a openclaw
+# 创建 skills 目录并下载 skill 文件
+mkdir -p ~/.openclaw/workspace/skills
+curl -o ~/.openclaw/workspace/skills/jina-cli.md \
+  https://raw.githubusercontent.com/geekjourneyx/jina-cli/main/skills/jina-cli/SKILL.md
 ```
 
 **验证安装**：
