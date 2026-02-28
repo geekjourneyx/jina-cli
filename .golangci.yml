@@ -14,19 +14,14 @@ linters:
     - unconvert
     - prealloc
     - gosec
-  disable:
-    - fieldalignment  # 禁用字段对齐检查，过于严格
 
 linters-settings:
   gocyclo:
-    min-complexity: 20  # 提高复杂度阈值
+    min-complexity: 20
   dupl:
     threshold: 100
   govet:
-    enable:
-      - nilfunc
-    disable:
-      - fieldalignment
+    enable-all: false
   errcheck:
     check-type-assertions: false
     check-blank: false
