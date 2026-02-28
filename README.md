@@ -40,23 +40,12 @@ OpenClaw 是一个**本地 AI 助理**（可以理解为"有终端权限的 Clau
 
 **适用场景**：本地 AI 助理、自动化工作流、文件系统操作
 
-**安装方式一** - 直接复制：
-
-```bash
-# 1. 创建 skills 目录
-mkdir -p ~/.openclaw/workspace/skills
-
-# 2. 下载 skill 文件
-curl -o ~/.openclaw/workspace/skills/jina-cli.md \
-  https://raw.githubusercontent.com/geekjourneyx/jina-cli/main/skills/jina-cli/SKILL.md
-```
-
 **安装方式** - 直接复制 skill 文件：
 
 ```bash
-# 创建 skills 目录并下载 skill 文件
-mkdir -p ~/.openclaw/workspace/skills
-curl -o ~/.openclaw/workspace/skills/jina-cli.md \
+# 创建 jina-cli skill 目录并下载
+mkdir -p ~/.openclaw/workspace/skills/jina-cli
+curl -o ~/.openclaw/workspace/skills/jina-cli/SKILL.md \
   https://raw.githubusercontent.com/geekjourneyx/jina-cli/main/skills/jina-cli/SKILL.md
 ```
 
@@ -67,7 +56,7 @@ curl -o ~/.openclaw/workspace/skills/jina-cli.md \
 openclaw
 
 # 在 OpenClaw 中直接使用 jina 命令
-# skill 会自动从 ~/.openclaw/workspace/skills/ 加载
+# skill 会自动从 ~/.openclaw/workspace/skills/jina-cli/ 加载
 ```
 
 **你将获得**：
@@ -106,7 +95,7 @@ npx skills add https://github.com/geekjourneyx/jina-cli --skill jina-cli
 
 ---
 
-### 方式二：CLI 二进制文件（推荐用于终端使用）
+### 方式三：CLI 二进制文件（推荐用于终端使用）
 
 **适用场景**：在终端/脚本中使用，或与其他工具集成
 
@@ -168,7 +157,7 @@ sudo mv jina /usr/local/bin/
 
 | 特性 | OpenClaw Skill | Claude Code Skill | CLI 二进制 |
 |------|----------------|-------------------|------------|
-| **安装位置** | `~/.openclaw/workspace/skills/` | `~/.claude/skills/` | `~/.local/bin/jina` |
+| **安装位置** | `~/.openclaw/workspace/skills/jina-cli/` | `~/.claude/skills/` | `~/.local/bin/jina` |
 | **使用环境** | OpenClaw 本地 AI 助理 | Claude Code | 任何终端/脚本 |
 | **AI 集成** | AI 自动理解功能 | AI 自动理解功能 | 需要手动调用 |
 | **文件权限** | ✅ 可访问本地文件系统 | ❌ 受限 | ✅ 完整权限 |
@@ -566,7 +555,7 @@ sudo mv jina /usr/local/bin/
 
 | Feature | OpenClaw Skill | Claude Code Skill | CLI Binary |
 |---------|----------------|-------------------|------------|
-| **Install location** | `~/.openclaw/workspace/skills/` | `~/.claude/skills/` | `~/.local/bin/jina` |
+| **Install location** | `~/.openclaw/workspace/skills/jina-cli/` | `~/.claude/skills/` | `~/.local/bin/jina` |
 | **Environment** | OpenClaw local AI assistant | Claude Code | Any terminal/script |
 | **AI integration** | AI understands functionality | AI understands functionality | Manual invocation |
 | **File system access** | ✅ Full access | ❌ Limited | ✅ Full access |
