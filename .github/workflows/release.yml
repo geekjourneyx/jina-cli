@@ -1,0 +1,55 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.24'
+
+      - name: Run tests
+        run: go test ./...
+
+      - name: Build binaries
+        run: |
+          mkdir -p dist
+
+          # Linux
+          GOOS=linux GOARCH=amd64 go build -o dist/jina-linux-amd64 ./cli
+          GOOS=linux GOARCH=arm64 go build -o dist/jina-linux-arm64 ./cli
+
+          # macOS
+          GOOS=darwin GOARCH=amd64 go build -o dist/jina-darwin-amd64 ./cli
+          GOOS=darwin GOARCH=arm64 go build -o dist/jina-darwin-arm64 ./cli
+
+          # Windows
+          GOOS=windows GOARCH=amd64 go build -o dist/jina-windows-amd64.exe ./cli
+
+          # Generate checksums
+          cd dist
+          sha256sum * > SHA256SUMS
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/jina-linux-amd64
+            dist/jina-linux-arm64
+            dist/jina-darwin-amd64
+            dist/jina-darwin-arm64
+            dist/jina-windows-amd64.exe
+            dist/SHA256SUMS
+          draft: false
+          prerelease: false

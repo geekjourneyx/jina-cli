@@ -1,0 +1,34 @@
+linters:
+  enable:
+    - gofmt
+    - goimports
+    - govet
+    - errcheck
+    - staticcheck
+    - unused
+    - gosimple
+    - structcheck
+    - varcheck
+    - ineffassign
+    - deadcode
+    - gocyclo
+    - dupl
+    - misspell
+    - unconvert
+    - prealloc
+    - exportloopref
+    - gosec
+
+linters-settings:
+  gocyclo:
+    min-complexity: 15
+  dupl:
+    threshold: 100
+  govet:
+    enable-all: true
+  misspell:
+    locale: US
+
+run:
+  timeout: 5m
+  go: "1.24"
