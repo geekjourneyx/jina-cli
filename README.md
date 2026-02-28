@@ -21,22 +21,86 @@
 - **read** - 读取 URL 内容，输出 Markdown/Text/HTML 格式
 - **search** - 网络搜索，自动获取并处理搜索结果
 
-### Claude Code Skill 安装
+---
 
-**推荐方式** - 在 Claude Code 中直接使用：
+## 安装指南
+
+jina 有两种独立的安装方式，根据你的使用场景选择：
+
+### 方式一：Claude Code Skill（推荐用于 AI 辅助开发）
+
+**适用场景**：在 Claude Code 中使用 AI 协助你处理网页内容
+
+**安装步骤**：
 
 ```bash
+# 1. 确保已安装 Node.js 和 Claude Code
+node --version
+# v18.0.0 或更高版本
+
+# 2. 安装 jina skill
 npx skills add https://github.com/geekjourneyx/jina-cli --skill jina-cli
 ```
 
-安装后，在 Claude Code 中直接使用 `jina` 相关命令，无需手动安装 CLI。
+**安装后验证**：
 
-### 快速安装
+```bash
+# 在 Claude Code 中可以直接使用
+# 无需额外操作，skill 会自动加载
+```
 
-#### 一键安装（推荐）
+**你将获得**：
+- ✅ 在 Claude Code 中直接调用 `jina read` 和 `jina search` 命令
+- ✅ AI 会自动理解 jina 的功能和使用方式
+- ✅ 无需手动安装 CLI 二进制文件
+
+---
+
+### 方式二：CLI 二进制文件（推荐用于终端使用）
+
+**适用场景**：在终端/脚本中使用，或与其他工具集成
+
+#### 一键安装（Linux/macOS）
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/geekjourneyx/jina-cli/main/scripts/install.sh | bash
+```
+
+安装脚本会自动：
+1. 检测你的系统架构（Linux/macOS，amd64/arm64）
+2. 下载对应平台的二进制文件
+3. 安装到 `~/.local/bin/jina` 或 `~/bin/jina`
+4. 提示如何添加到 PATH（如需要）
+
+#### 验证安装
+
+```bash
+# 检查是否安装成功
+jina --version
+# 预期输出: jina version 1.0.0 (构建时间: ..., 提交: ...)
+
+# 测试基本功能
+jina read --url "https://example.com"
+```
+
+#### 手动安装
+
+如果自动安装失败，可以手动下载：
+
+```bash
+# 1. 下载对应平台的二进制
+# Linux amd64:
+wget https://github.com/geekjourneyx/jina-cli/releases/latest/download/jina-linux-amd64 -O jina
+chmod +x jina
+sudo mv jina /usr/local/bin/
+
+# macOS ARM64 (Apple Silicon):
+wget https://github.com/geekjourneyx/jina-cli/releases/latest/download/jina-darwin-arm64 -O jina
+chmod +x jina
+sudo mv jina /usr/local/bin/
+
+# 2. 验证安装
+jina --version
 ```
 
 #### 从源码构建
@@ -47,6 +111,22 @@ cd jina-cli
 go build -o jina ./cli
 sudo mv jina /usr/local/bin/
 ```
+
+---
+
+### 两种方式的区别
+
+| 特性 | Claude Code Skill | CLI 二进制 |
+|------|-------------------|------------|
+| **安装位置** | `~/.claude/skills/` | `~/.local/bin/jina` |
+| **使用环境** | 仅 Claude Code | 任何终端/脚本 |
+| **AI 集成** | AI 自动理解功能 | 需要手动调用 |
+| **更新方式** | `npx skills update` | 重新运行安装脚本 |
+| **适用场景** | AI 辅助开发 | 自动化脚本、日常使用 |
+
+**注意**：两种方式完全独立，可以同时安装，互不干扰。
+
+---
 
 ### 快速开始
 
@@ -287,22 +367,86 @@ jina-cli/
 - **read** - Extract content from URLs in Markdown/Text/HTML format
 - **search** - Search the web with AI-powered result processing
 
-### Claude Code Skill Installation
+---
 
-**Recommended** - Use directly in Claude Code:
+## Installation Guide
+
+jina offers two independent installation methods. Choose based on your use case:
+
+### Method 1: Claude Code Skill (Recommended for AI-Assisted Development)
+
+**Use case**: Using jina within Claude Code with AI assistance
+
+**Installation steps**:
 
 ```bash
+# 1. Ensure Node.js and Claude Code are installed
+node --version
+# v18.0.0 or higher
+
+# 2. Install jina skill
 npx skills add https://github.com/geekjourneyx/jina-cli --skill jina-cli
 ```
 
-After installation, use `jina` commands directly in Claude Code without manual CLI installation.
+**Verify installation**:
 
-### Quick Install
+```bash
+# You can now use jina commands directly in Claude Code
+# No additional steps needed, skill loads automatically
+```
 
-#### One-line Installation (Recommended)
+**You get**:
+- ✅ Direct access to `jina read` and `jina search` commands in Claude Code
+- ✅ AI automatically understands jina's functionality
+- ✅ No manual CLI binary installation required
+
+---
+
+### Method 2: CLI Binary (Recommended for Terminal/Scripting)
+
+**Use case**: Using in terminal/scripts, or integrating with other tools
+
+#### One-line Installation (Linux/macOS)
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/geekjourneyx/jina-cli/main/scripts/install.sh | bash
+```
+
+The installation script automatically:
+1. Detects your system architecture (Linux/macOS, amd64/arm64)
+2. Downloads the appropriate binary for your platform
+3. Installs to `~/.local/bin/jina` or `~/bin/jina`
+4. Prompts to add to PATH if needed
+
+#### Verify Installation
+
+```bash
+# Check if installation succeeded
+jina --version
+# Expected output: jina version 1.0.0 (build: ..., commit: ...)
+
+# Test basic functionality
+jina read --url "https://example.com"
+```
+
+#### Manual Installation
+
+If auto-install fails, download manually:
+
+```bash
+# 1. Download binary for your platform
+# Linux amd64:
+wget https://github.com/geekjourneyx/jina-cli/releases/latest/download/jina-linux-amd64 -O jina
+chmod +x jina
+sudo mv jina /usr/local/bin/
+
+# macOS ARM64 (Apple Silicon):
+wget https://github.com/geekjourneyx/jina-cli/releases/latest/download/jina-darwin-arm64 -O jina
+chmod +x jina
+sudo mv jina /usr/local/bin/
+
+# 2. Verify installation
+jina --version
 ```
 
 #### Build from Source
@@ -313,6 +457,22 @@ cd jina-cli
 go build -o jina ./cli
 sudo mv jina /usr/local/bin/
 ```
+
+---
+
+### Comparison
+
+| Feature | Claude Code Skill | CLI Binary |
+|---------|-------------------|------------|
+| **Install location** | `~/.claude/skills/` | `~/.local/bin/jina` |
+| **Environment** | Claude Code only | Any terminal/script |
+| **AI integration** | AI understands functionality | Manual invocation |
+| **Updates** | `npx skills update` | Re-run install script |
+| **Best for** | AI-assisted development | Automation, daily use |
+
+**Note**: The two methods are completely independent. You can install both without conflicts.
+
+---
 
 ### Quick Start
 
