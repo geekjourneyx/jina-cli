@@ -1,7 +1,6 @@
 package api
 
 import (
-	"bytes"
 	"fmt"
 	"io"
 	"net/http"
@@ -241,39 +240,4 @@ func parseSearchResults(content string, format string) []SearchResult {
 	}
 
 	return results
-}
-
-// doRequest 执行通用 HTTP 请求（用于其他可能的 API 调用）
-func (c *Client) doRequest(method, url string, body []byte, headers map[string]string) ([]byte, error) {
-	var bodyReader io.Reader
-	if body != nil {
-		bodyReader = bytes.NewReader(body)
-	}
-
-	req, err := http.NewRequest(method, url, bodyReader)
-	if err != nil {
-		return nil, fmt.Errorf("创建请求失败: %w", err)
-	}
-
-	// 设置请求头
-	c.setCommonHeaders(req)
-	for k, v := range headers {
-		req.Header.Set(k, v)
-	}
-
-	// 发送请求
-	resp, err := c.httpClient.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("请求失败: %w", err)
-	}
-	defer resp.Body.Close()
-
-	// 检查 HTTP 状态码
-	if resp.StatusCode != http.StatusOK {
-		bodyBytes, _ := io.ReadAll(resp.Body)
-		return nil, fmt.Errorf("HTTP 错误: %d, 响应: %s", resp.StatusCode, string(bodyBytes))
-	}
-
-	// 读取响应
-	return io.ReadAll(resp.Body)
 }

@@ -38,7 +38,7 @@ func TestJSONOutput_Print(t *testing.T) {
 	os.Stdout = oldStdout
 
 	// 读取输出
-	buf.ReadFrom(r)
+	_, _ = buf.ReadFrom(r)
 	output := buf.String()
 
 	// 验证 JSON 格式
@@ -111,7 +111,7 @@ func TestMarkdownOutput_Print_Map(t *testing.T) {
 	os.Stdout = oldStdout
 
 	// 读取输出
-	buf.ReadFrom(r)
+	_, _ = buf.ReadFrom(r)
 	output := buf.String()
 
 	// 验证 Markdown 格式
@@ -155,7 +155,7 @@ func TestMarkdownOutput_Print_Slice(t *testing.T) {
 	os.Stdout = oldStdout
 
 	// 读取输出
-	buf.ReadFrom(r)
+	_, _ = buf.ReadFrom(r)
 	output := buf.String()
 
 	// 验证 Markdown 格式
@@ -218,7 +218,7 @@ func TestSuccess(t *testing.T) {
 	w.Close()
 	os.Stdout = oldStdout
 
-	buf.ReadFrom(r)
+	_, _ = buf.ReadFrom(r)
 	output := buf.String()
 
 	if !contains(output, `"success": true`) {
@@ -240,7 +240,7 @@ func TestPrintSuccess(t *testing.T) {
 	w.Close()
 	os.Stdout = oldStdout
 
-	buf.ReadFrom(r)
+	_, _ = buf.ReadFrom(r)
 	output := buf.String()
 
 	if !contains(output, "test message: value") {
@@ -259,7 +259,7 @@ func TestPrintError(t *testing.T) {
 	w.Close()
 	os.Stderr = oldStderr
 
-	buf.ReadFrom(r)
+	_, _ = buf.ReadFrom(r)
 	output := buf.String()
 
 	if !contains(output, "error: test error") {

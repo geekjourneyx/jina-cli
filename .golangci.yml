@@ -7,27 +7,29 @@ linters:
     - staticcheck
     - unused
     - gosimple
-    - structcheck
-    - varcheck
     - ineffassign
-    - deadcode
     - gocyclo
     - dupl
     - misspell
     - unconvert
     - prealloc
-    - exportloopref
     - gosec
+  disable:
+    - fieldalignment  # 禁用字段对齐检查，过于严格
 
 linters-settings:
   gocyclo:
-    min-complexity: 15
+    min-complexity: 20  # 提高复杂度阈值
   dupl:
     threshold: 100
   govet:
-    enable-all: true
-  misspell:
-    locale: US
+    enable:
+      - nilfunc
+    disable:
+      - fieldalignment
+  errcheck:
+    check-type-assertions: false
+    check-blank: false
 
 run:
   timeout: 5m

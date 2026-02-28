@@ -136,7 +136,8 @@ func processURL(client *api.Client, url, responseFormat string, out output.Outpu
 
 	resp, err := client.Read(req)
 	if err != nil {
-		out.Error(err)
+		// out.Error 会调用 os.Exit，这里只是满足 lint 检查
+		_ = out.Error(err)
 		return
 	}
 
@@ -160,14 +161,14 @@ func processBatch(client *api.Client, filename, responseFormat string, out outpu
 	// 读取文件
 	content, err := os.ReadFile(filename)
 	if err != nil {
-		out.Error(fmt.Errorf("读取文件失败: %w", err))
+		_ = out.Error(fmt.Errorf("读取文件失败: %w", err))
 		return
 	}
 
 	// 解析 URL 列表
 	urls := parseURLList(string(content))
 	if len(urls) == 0 {
-		out.Error(fmt.Errorf("文件中没有找到有效的 URL"))
+		_ = out.Error(fmt.Errorf("文件中没有找到有效的 URL"))
 		return
 	}
 

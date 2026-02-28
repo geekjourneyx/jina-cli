@@ -53,7 +53,7 @@ func TestClient_Read_Success(t *testing.T) {
 		// 返回成功响应
 		w.Header().Set("Content-Type", "text/markdown")
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("# Test Content\n\nThis is a test."))
+		_, _ = w.Write([]byte("# Test Content\n\nThis is a test."))
 	}))
 	defer server.Close()
 
@@ -92,7 +92,7 @@ func TestClient_Read_WithHeaders(t *testing.T) {
 		}
 
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("content"))
+		_, _ = w.Write([]byte("content"))
 	}))
 	defer server.Close()
 
@@ -124,7 +124,7 @@ func TestClient_Read_POSTMethod(t *testing.T) {
 		}
 
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("content"))
+		_, _ = w.Write([]byte("content"))
 	}))
 	defer server.Close()
 
