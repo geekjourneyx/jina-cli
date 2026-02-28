@@ -273,7 +273,7 @@ export JINA_API_KEY=jina_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 jina read -u "https://example.com" -k jina_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
-获取 API Key：访问 [Jina AI](https://jina.ai/) 注册并获取。
+获取 API Key：访问 [Jina AI Reader](https://jina.ai/reader/#apiform) 注册并获取。
 
 ### 输出格式
 
@@ -644,7 +644,7 @@ export JINA_API_KEY=jina_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 jina read -u "https://example.com" -k jina_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
-Get your API key: Visit [Jina AI](https://jina.ai/) to sign up.
+Get your API key: Visit [Jina AI Reader](https://jina.ai/reader/#apiform) to sign up.
 
 ### Output Formats
 
