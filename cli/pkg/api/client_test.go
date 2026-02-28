@@ -144,7 +144,7 @@ func TestClient_Read_POSTMethod(t *testing.T) {
 func TestClient_Read_HTTPError(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte("Not Found"))
+		_, _ = w.Write([]byte("Not Found"))
 	}))
 	defer server.Close()
 
@@ -171,7 +171,7 @@ func TestClient_Search_Success(t *testing.T) {
 		}
 
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("Result 1\nResult 2\nResult 3"))
+		_, _ = w.Write([]byte("Result 1\nResult 2\nResult 3"))
 	}))
 	defer server.Close()
 
@@ -203,7 +203,7 @@ func TestClient_Search_WithSiteFilter(t *testing.T) {
 		}
 
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("filtered results"))
+		_, _ = w.Write([]byte("filtered results"))
 	}))
 	defer server.Close()
 
@@ -223,7 +223,7 @@ func TestClient_Search_WithSiteFilter(t *testing.T) {
 func TestClient_Search_HTTPError(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("Internal Server Error"))
+		_, _ = w.Write([]byte("Internal Server Error"))
 	}))
 	defer server.Close()
 

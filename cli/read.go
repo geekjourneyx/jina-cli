@@ -5,9 +5,9 @@ import (
 	"os"
 	"strings"
 
-	"github.com/spf13/cobra"
 	"github.com/geekjourneyx/jina-cli/cli/pkg/api"
 	"github.com/geekjourneyx/jina-cli/cli/pkg/output"
+	"github.com/spf13/cobra"
 )
 
 // ReadCmd read 命令

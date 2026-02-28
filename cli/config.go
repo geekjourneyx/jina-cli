@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/spf13/cobra"
 	"github.com/geekjourneyx/jina-cli/cli/pkg/config"
 	"github.com/geekjourneyx/jina-cli/cli/pkg/output"
+	"github.com/spf13/cobra"
 )
 
 // ConfigCmd config 命令

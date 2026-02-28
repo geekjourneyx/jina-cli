@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 
-	"github.com/spf13/cobra"
 	"github.com/geekjourneyx/jina-cli/cli/pkg/api"
 	"github.com/geekjourneyx/jina-cli/cli/pkg/output"
+	"github.com/spf13/cobra"
 )
 
 // SearchCmd search 命令
@@ -110,7 +110,7 @@ func runSearch(cmd *cobra.Command, args []string) {
 	// 执行搜索
 	resp, err := client.Search(req)
 	if err != nil {
-		out.Error(err)
+		_ = out.Error(err)
 		return
 	}
 
