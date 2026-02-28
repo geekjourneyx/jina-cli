@@ -4,6 +4,11 @@
 
 ### 为 AI Agent 打造的网页阅读 CLI 工具
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![GitHub Release](https://img.shields.io/github/v/release/geekjourneyx/jina-cli)](https://github.com/geekjourneyx/jina-cli/releases)
+[![Go Version](https://img.shields.io/badge/Go-1.24+-00ADD8?logo=go)](https://golang.org/)
+[![CLI](https://img.shields.io/badge/CLI-Cobra-29BEB0?logo=terminal)](https://github.com/spf13/cobra)
+
 [English](#english) | [中文](#中文)
 
 </div>
@@ -426,6 +431,33 @@ jina-cli/
 
 ---
 
+## 💰 打赏
+
+如果该项目帮助了您，欢迎请作者喝杯咖啡 ☕️
+
+**微信打赏**
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/geekjourneyx/awesome-developer-go-sail/main/docs/assets/wechat-reward-code.jpg" alt="微信打赏码" width="200" />
+</p>
+
+---
+
+## 🧑‍💻 作者
+
+**[geekjourneyx](https://geekjourney.dev)**
+
+- **X (Twitter)**: https://x.com/seekjourney
+- **公众号**: 极客杰尼
+
+关注公众号，获取更多 AI 编程、AI 工具与 AI 出海建站的实战分享：
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/geekjourneyx/awesome-developer-go-sail/main/docs/assets/qrcode.jpg" alt="公众号：极客杰尼" width="180" />
+</p>
+
+---
+
 ## English
 
 ### Overview
@@ -777,3 +809,30 @@ GOOS=windows GOARCH=amd64 go build -o jina-windows-amd64.exe ./cli
 
 - [Jina AI Reader API](https://github.com/jina-ai/reader) - Core API service
 - [md2wechat-lite](https://github.com/geekjourneyx/md2wechat-lite) - Architecture reference
+
+---
+
+## 💰 Sponsor
+
+If this project helped you, consider buying me a coffee ☕️
+
+**WeChat Pay**
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/geekjourneyx/awesome-developer-go-sail/main/docs/assets/wechat-reward-code.jpg" alt="WeChat Pay QR Code" width="200" />
+</p>
+
+---
+
+## 👨‍💻 Author
+
+**[geekjourneyx](https://geekjourney.dev)**
+
+- **X (Twitter)**: https://x.com/seekjourney
+- **WeChat Official Account**: 极客杰尼 (Geek Journey)
+
+Follow for more insights on AI coding, AI tools, and AI-powered global website building:
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/geekjourneyx/awesome-developer-go-sail/main/docs/assets/qrcode.jpg" alt="WeChat Official Account: Geek Journey" width="180" />
+</p>
