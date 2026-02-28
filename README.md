@@ -254,8 +254,26 @@ jina config path
 | `timeout` | `JINA_TIMEOUT` | `30` | 请求超时（秒） |
 | `with_generated_alt` | `JINA_WITH_GENERATED_ALT` | `false` | 启用图片描述 |
 | `proxy_url` | `JINA_PROXY_URL` | `""` | 代理服务器 |
+| `api_key` | `JINA_API_KEY` | `""` | API 密钥（用于更高速率限制） |
 
 **优先级：** 命令行参数 > 环境变量 > 配置文件 > 默认值
+
+### API Key 使用
+
+添加 API Key 可以获得更高的速率限制：
+
+```bash
+# 方式 1：配置文件设置
+jina config set api_key jina_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+# 方式 2：环境变量
+export JINA_API_KEY=jina_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+# 方式 3：命令行参数
+jina read -u "https://example.com" -k jina_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+```
+
+获取 API Key：访问 [Jina AI](https://jina.ai/) 注册并获取。
 
 ### 输出格式
 
@@ -607,8 +625,26 @@ jina config path
 | `timeout` | `JINA_TIMEOUT` | `30` | Request timeout (seconds) |
 | `with_generated_alt` | `JINA_WITH_GENERATED_ALT` | `false` | Enable image captioning |
 | `proxy_url` | `JINA_PROXY_URL` | `""` | Proxy server |
+| `api_key` | `JINA_API_KEY` | `""` | API key for higher rate limits |
 
 **Priority:** CLI args > Env vars > Config file > Defaults
+
+### API Key Usage
+
+Adding an API key provides higher rate limits:
+
+```bash
+# Method 1: Set via config file
+jina config set api_key jina_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+# Method 2: Set via environment variable
+export JINA_API_KEY=jina_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+# Method 3: Pass via command line
+jina read -u "https://example.com" -k jina_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+```
+
+Get your API key: Visit [Jina AI](https://jina.ai/) to sign up.
 
 ### Output Formats
 
