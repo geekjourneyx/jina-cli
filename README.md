@@ -25,9 +25,51 @@
 
 ## 安装指南
 
-jina 有两种独立的安装方式，根据你的使用场景选择：
+jina 有三种独立的安装方式，根据你的使用场景选择：
 
-### 方式一：Claude Code Skill（推荐用于 AI 辅助开发）
+### 方式一：OpenClaw Skill（推荐本地 AI 助理）
+
+**什么是 OpenClaw？**
+
+OpenClaw 是一个**本地 AI 助理**（可以理解为"有终端权限的 Claude"），运行在你的机器上。它通过 **Skills** 插件扩展能力，支持 9000+ 个技能插件。
+
+**适用场景**：本地 AI 助理、自动化工作流、文件系统操作
+
+**安装方式一** - 直接复制：
+
+```bash
+# 1. 创建 skills 目录
+mkdir -p ~/.openclaw/workspace/skills
+
+# 2. 下载 skill 文件
+curl -o ~/.openclaw/workspace/skills/jina-cli.md \
+  https://raw.githubusercontent.com/geekjourneyx/jina-cli/main/skills/jina-cli/SKILL.md
+```
+
+**安装方式二** - npx 安装：
+
+```bash
+npx skills add https://github.com/geekjourneyx/jina-cli --skill jina-cli -a openclaw
+```
+
+**验证安装**：
+
+```bash
+# 启动 OpenClaw
+openclaw
+
+# 在 OpenClaw 中直接使用 jina 命令
+# skill 会自动从 ~/.openclaw/workspace/skills/ 加载
+```
+
+**你将获得**：
+- ✅ 本地 AI 助理直接调用 `jina read` 和 `jina search`
+- ✅ 无需安装 CLI 二进制
+- ✅ 可以处理本地文件、执行脚本等
+
+---
+
+### 方式二：Claude Code Skill（推荐用于 AI 辅助开发）
 
 **适用场景**：在 Claude Code 中使用 AI 协助你处理网页内容
 
@@ -114,17 +156,24 @@ sudo mv jina /usr/local/bin/
 
 ---
 
-### 两种方式的区别
+### 三种安装方式对比
 
-| 特性 | Claude Code Skill | CLI 二进制 |
-|------|-------------------|------------|
-| **安装位置** | `~/.claude/skills/` | `~/.local/bin/jina` |
-| **使用环境** | 仅 Claude Code | 任何终端/脚本 |
-| **AI 集成** | AI 自动理解功能 | 需要手动调用 |
-| **更新方式** | `npx skills update` | 重新运行安装脚本 |
-| **适用场景** | AI 辅助开发 | 自动化脚本、日常使用 |
+| 特性 | OpenClaw Skill | Claude Code Skill | CLI 二进制 |
+|------|----------------|-------------------|------------|
+| **安装位置** | `~/.openclaw/workspace/skills/` | `~/.claude/skills/` | `~/.local/bin/jina` |
+| **使用环境** | OpenClaw 本地 AI 助理 | Claude Code | 任何终端/脚本 |
+| **AI 集成** | AI 自动理解功能 | AI 自动理解功能 | 需要手动调用 |
+| **文件权限** | ✅ 可访问本地文件系统 | ❌ 受限 | ✅ 完整权限 |
+| **脚本执行** | ✅ 可执行脚本 | ❌ 受限 | ✅ 完整权限 |
+| **更新方式** | 重新下载/`npx skills update` | `npx skills update` | 重新运行安装脚本 |
+| **适用场景** | 本地 AI 助理、自动化 | AI 辅助开发 | 脚本集成、日常使用 |
 
-**注意**：两种方式完全独立，可以同时安装，互不干扰。
+**推荐选择**：
+- **OpenClaw** → 最强能力，本地运行，可操作文件系统
+- **Claude Code** → 开发体验好，AI 辅助编码
+- **CLI 二进制** → 最轻量，适合脚本集成
+
+**注意**：三种方式完全独立，可以同时安装，互不干扰。
 
 ---
 
@@ -462,15 +511,22 @@ sudo mv jina /usr/local/bin/
 
 ### Comparison
 
-| Feature | Claude Code Skill | CLI Binary |
-|---------|-------------------|------------|
-| **Install location** | `~/.claude/skills/` | `~/.local/bin/jina` |
-| **Environment** | Claude Code only | Any terminal/script |
-| **AI integration** | AI understands functionality | Manual invocation |
-| **Updates** | `npx skills update` | Re-run install script |
-| **Best for** | AI-assisted development | Automation, daily use |
+| Feature | OpenClaw Skill | Claude Code Skill | CLI Binary |
+|---------|----------------|-------------------|------------|
+| **Install location** | `~/.openclaw/workspace/skills/` | `~/.claude/skills/` | `~/.local/bin/jina` |
+| **Environment** | OpenClaw local AI assistant | Claude Code | Any terminal/script |
+| **AI integration** | AI understands functionality | AI understands functionality | Manual invocation |
+| **File system access** | ✅ Full access | ❌ Limited | ✅ Full access |
+| **Script execution** | ✅ Can run scripts | ❌ Limited | ✅ Full access |
+| **Updates** | Re-download / `npx skills update` | `npx skills update` | Re-run install script |
+| **Best for** | Local AI assistant, automation | AI-assisted development | Script integration, daily use |
 
-**Note**: The two methods are completely independent. You can install both without conflicts.
+**Recommendations**:
+- **OpenClaw** → Most capable, runs locally, full system access
+- **Claude Code** → Best dev experience, AI-assisted coding
+- **CLI Binary** → Lightweight, perfect for scripts
+
+**Note**: The three methods are completely independent. Install any or all without conflicts.
 
 ---
 
