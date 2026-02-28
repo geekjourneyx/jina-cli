@@ -21,6 +21,16 @@
 - **read** - 读取 URL 内容，输出 Markdown/Text/HTML 格式
 - **search** - 网络搜索，自动获取并处理搜索结果
 
+### Claude Code Skill 安装
+
+**推荐方式** - 在 Claude Code 中直接使用：
+
+```bash
+npx skills add https://github.com/geekjourneyx/jina-cli --skill jina-cli
+```
+
+安装后，在 Claude Code 中直接使用 `jina` 相关命令，无需手动安装 CLI。
+
 ### 快速安装
 
 #### 一键安装（推荐）
@@ -276,6 +286,16 @@ jina-cli/
 
 - **read** - Extract content from URLs in Markdown/Text/HTML format
 - **search** - Search the web with AI-powered result processing
+
+### Claude Code Skill Installation
+
+**Recommended** - Use directly in Claude Code:
+
+```bash
+npx skills add https://github.com/geekjourneyx/jina-cli --skill jina-cli
+```
+
+After installation, use `jina` commands directly in Claude Code without manual CLI installation.
 
 ### Quick Install
 
