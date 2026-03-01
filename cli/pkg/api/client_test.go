@@ -246,44 +246,48 @@ func TestParseSearchResults(t *testing.T) {
 	tests := []struct {
 		name    string
 		content string
-		format  string
 		wantLen int
 	}{
 		{
 			name:    "empty content",
 			content: "",
-			format:  "",
 			wantLen: 0,
 		},
 		{
 			name:    "single line",
 			content: "Single result",
-			format:  "",
 			wantLen: 1,
 		},
 		{
 			name:    "multiple lines",
 			content: "Result 1\nResult 2\nResult 3",
-			format:  "",
 			wantLen: 3,
 		},
 		{
 			name:    "lines with empty lines",
 			content: "Result 1\n\nResult 2\n  \nResult 3",
-			format:  "",
 			wantLen: 3,
 		},
 		{
-			name:    "JSON format (not implemented yet)",
+			name:    "JSON empty array",
 			content: "[]",
-			format:  "json",
 			wantLen: 0,
+		},
+		{
+			name:    "JSON object with data array",
+			content: `{"code":200,"data":[{"title":"Result 1","url":"https://example.com","content":"Content 1"},{"title":"Result 2","url":"https://example2.com","content":"Content 2"}]}`,
+			wantLen: 2,
+		},
+		{
+			name:    "JSON array of objects",
+			content: `[{"title":"A","url":"https://a.com","content":"aaa"},{"title":"B","url":"https://b.com","content":"bbb"}]`,
+			wantLen: 2,
 		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			results := parseSearchResults(tt.content, tt.format)
+			results := parseSearchResults(tt.content)
 			if len(results) != tt.wantLen {
 				t.Errorf("parseSearchResults() len = %d, want %d", len(results), tt.wantLen)
 			}
