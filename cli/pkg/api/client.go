@@ -1,6 +1,7 @@
 package api
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
@@ -123,6 +124,10 @@ func (c *Client) Search(req *SearchRequest) (*SearchResponse, error) {
 
 	// 设置请求头
 	c.setCommonHeaders(httpReq)
+	httpReq.Header.Set("Accept", "application/json")
+	if req.ResponseFormat != "" {
+		httpReq.Header.Set("X-Respond-With", req.ResponseFormat)
+	}
 	for k, v := range req.Headers {
 		httpReq.Header.Set(k, v)
 	}
@@ -146,10 +151,8 @@ func (c *Client) Search(req *SearchRequest) (*SearchResponse, error) {
 		return nil, fmt.Errorf("读取响应失败: %w", err)
 	}
 
-	// 解析搜索结果（从 JSON 格式或纯文本格式）
-	// Search API 返回的是 JSON 格式的结果数组
-	// 如果没有指定 Accept: application/json，返回纯文本
-	results := parseSearchResults(string(content), req.ResponseFormat)
+	// 解析搜索结果
+	results := parseSearchResults(string(content))
 
 	return &SearchResponse{
 		Query:   req.Query,
@@ -211,33 +214,63 @@ func (c *Client) setRequestHeaders(req *http.Request, readReq *ReadRequest) {
 	}
 }
 
+// jinaSearchResponse Jina Search API JSON 响应结构
+type jinaSearchResponse struct {
+	Data []struct {
+		Title       string `json:"title"`
+		URL         string `json:"url"`
+		Description string `json:"description"`
+		Content     string `json:"content"`
+	} `json:"data"`
+}
+
 // parseSearchResults 解析搜索结果
-func parseSearchResults(content string, format string) []SearchResult {
-	// 如果是 JSON 格式，需要解析 JSON
-	// 如果是纯文本格式，按行分割
-	results := []SearchResult{}
+func parseSearchResults(content string) []SearchResult {
+	trimmed := strings.TrimSpace(content)
 
-	// 简单实现：按行分割，每行是一个结果
-	// 实际上 Search API 返回的是 JSON 格式
-	// 这里先做一个简单的实现，后续可以根据需要改进
-
-	// 尝试检测是否是 JSON 格式
-	if strings.HasPrefix(strings.TrimSpace(content), "[") {
-		// TODO: 实现 JSON 解析
-		// 目前先返回空结果
-		return results
-	}
-
-	// 纯文本格式，每行是一个结果
-	lines := strings.Split(content, "\n")
-	for _, line := range lines {
-		line = strings.TrimSpace(line)
-		if line != "" {
-			results = append(results, SearchResult{
-				Content: line,
-			})
+	// 尝试解析 JSON 响应 {"data":[...]}
+	if strings.HasPrefix(trimmed, "{") {
+		var resp jinaSearchResponse
+		if err := json.Unmarshal([]byte(trimmed), &resp); err == nil && len(resp.Data) > 0 {
+			results := make([]SearchResult, 0, len(resp.Data))
+			for _, item := range resp.Data {
+				results = append(results, SearchResult{
+					Title:   item.Title,
+					URL:     item.URL,
+					Content: item.Content,
+				})
+			}
+			return results
 		}
 	}
 
+	// 尝试解析 JSON 数组 [...]
+	if strings.HasPrefix(trimmed, "[") {
+		var items []struct {
+			Title   string `json:"title"`
+			URL     string `json:"url"`
+			Content string `json:"content"`
+		}
+		if err := json.Unmarshal([]byte(trimmed), &items); err == nil {
+			results := make([]SearchResult, 0, len(items))
+			for _, item := range items {
+				results = append(results, SearchResult{
+					Title:   item.Title,
+					URL:     item.URL,
+					Content: item.Content,
+				})
+			}
+			return results
+		}
+	}
+
+	// 回退：纯文本按行分割
+	results := []SearchResult{}
+	for _, line := range strings.Split(content, "\n") {
+		line = strings.TrimSpace(line)
+		if line != "" {
+			results = append(results, SearchResult{Content: line})
+		}
+	}
 	return results
 }
